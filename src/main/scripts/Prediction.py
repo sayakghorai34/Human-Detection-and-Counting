@@ -2,7 +2,7 @@ import cv2
 from ultralytics import YOLO
 
 def main():
-    model = YOLO("models/yolo11m.onnx")
+    model = YOLO("models/yolov8s.onnx")
 
     video_source = 1
     cap = cv2.VideoCapture(video_source)
