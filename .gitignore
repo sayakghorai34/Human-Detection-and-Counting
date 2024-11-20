@@ -64,3 +64,13 @@ target/
 
 # Idea
 .idea
+.venv/pyvenv.cfg
+.venv/Scripts/activate
+.venv/Scripts/activate.bat
+.venv/Scripts/Activate.ps1
+.venv/Scripts/pythonw.exe
+.venv/Scripts/python.exe
+.venv/Scripts/pip3.exe
+.venv/Scripts/pip3.11.exe
+.venv/Scripts/pip.exe
+.venv/Scripts/deactivate.bat

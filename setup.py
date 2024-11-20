@@ -17,7 +17,7 @@ def check_python_version():
     """Check if Python 3.11 is installed."""
     print("Checking Python version...")
     try:
-        result = subprocess.run(["python3.11", "--version"], capture_output=True, text=True)
+        result = subprocess.run(["python", "--version"], capture_output=True, text=True)
         if result.returncode == 0:
             print("Python 3.11 found.")
             return "python3.11"
