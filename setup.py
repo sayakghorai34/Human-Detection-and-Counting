@@ -1,27 +1,8 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#   This file is part of PyBuilder
-#
-#   Copyright 2011-2020 PyBuilder Team
-#
-#   Licensed under the Apache License, Version 2.0 (the "License");
-#   you may not use this file except in compliance with the License.
-#   You may obtain a copy of the License at
-#
-#       http://www.apache.org/licenses/LICENSE-2.0
-#
-#   Unless required by applicable law or agreed to in writing, software
-#   distributed under the License is distributed on an "AS IS" BASIS,
-#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#   See the License for the specific language governing permissions and
-#   limitations under the License.
-
+import glob
 import os
+import shutil
 import subprocess
 import sys
-import glob
-import shutil
 import platform
 from pathlib import Path
 from sys import version_info
@@ -94,21 +75,17 @@ def create_and_activate_venv(python_path):
 
 
 def install_requirements():
-    """Install dependencies from requirements.txt."""
+    """Install dependencies from requirements.txt and GitHub repo."""
     print("Installing dependencies...")
     subprocess.run(["pip", "install", "--upgrade", "pip"])
-    if not Path("requirements.txt").exists():
-        print("requirements.txt not found.")
-        sys.exit(1)
-    subprocess.run(["pip", "install", "-r", "requirements.txt"])
 
+    # Install requirements from requirements.txt if it exists
+    if Path("requirements.txt").exists():
+        subprocess.run(["pip", "install", "-r", "requirements.txt"])
 
-def install_from_git():
-    """Install the project from a Git repository."""
-    print("Installing project from Git repository...")
-    git_url = "https://github.com/sayakghorai34/Human-Detection-and-Counting.git"  # Replace with your GitHub repository
-    branch = "main"  # Replace with the branch you want to install from
-    subprocess.run(["pip", "install", f"git+{git_url}@{branch}"])
+    # Install your GitHub repository (replace 'main' with the branch name you want)
+    github_repo_url = "git+https://github.com/sayakghorai34/Human-Detection-and-Counting.git@main"
+    subprocess.run(["pip", "install", github_repo_url])
 
 
 def setup_environment():
@@ -120,7 +97,6 @@ def setup_environment():
 
     create_and_activate_venv(python_path)
     install_requirements()
-    install_from_git()  # Install from Git repository
 
 
 def install_pyb():
