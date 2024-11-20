@@ -27,6 +27,7 @@ pillow==11.0.0
 protobuf==5.28.3
 psutil==6.1.0
 py-cpuinfo==9.0.0
+pybuilder==0.13.13
 pyparsing==3.2.0
 python-dateutil==2.9.0.post0
 pytz==2024.2
