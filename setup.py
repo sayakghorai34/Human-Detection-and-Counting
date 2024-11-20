@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#   -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 #   This file is part of PyBuilder
 #
@@ -103,6 +103,14 @@ def install_requirements():
     subprocess.run(["pip", "install", "-r", "requirements.txt"])
 
 
+def install_from_git():
+    """Install the project from a Git repository."""
+    print("Installing project from Git repository...")
+    git_url = "https://github.com/sayakghorai34/Human-Detection-and-Counting.git"  # Replace with your GitHub repository
+    branch = "main"  # Replace with the branch you want to install from
+    subprocess.run(["pip", "install", f"git+{git_url}@{branch}"])
+
+
 def setup_environment():
     """Ensure Python 3.11, virtual environment, and requirements are set up."""
     python_path = check_python_version()
@@ -112,6 +120,7 @@ def setup_environment():
 
     create_and_activate_venv(python_path)
     install_requirements()
+    install_from_git()  # Install from Git repository
 
 
 def install_pyb():
