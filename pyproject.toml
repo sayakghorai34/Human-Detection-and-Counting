@@ -30,6 +30,7 @@ unittest_module_glob = "test_*.py"
 
 [tool.pybuilder.plugins.install_dependencies]
 install_log_level = "DEBUG"
+requirements_file = "requirements.txt"  # Combined into a single section
 
 [tool.pybuilder.plugins.pip]
 index_url = "https://pypi.org/simple"
@@ -39,6 +40,3 @@ author = "Sayak Ghorai"
 author_email = "your.email@example.com"
 description = "A Python project for detecting and counting humans in images or video streams."
 home_page = "https://github.com/sayakghorai34/Human-Detection-and-Counting"
-
-[tool.pybuilder.plugins.install_dependencies]
-requirements_file = "requirements.txt"
