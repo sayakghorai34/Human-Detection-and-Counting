@@ -1,3 +1,44 @@
 [build-system]
-requires = ["pybuilder>=0.12.0"]
-build-backend = "pybuilder.pep517"
+requires = ["pybuilder>=0.13.4", "setuptools>=42", "wheel"]
+build-backend = "pybuilder.backend"
+
+[tool.pybuilder]
+name = "human-detection-and-counting"
+version = "1.0.0"
+summary = "A Python project for human detection and counting."
+license = "MIT"
+url = "https://github.com/sayakghorai34/Human-Detection-and-Counting"
+
+# Directories used by PyBuilder
+dir_source_main_python = "src/main/python"
+dir_source_main_scripts = "src/main/scripts"
+dir_source_unittest_python = "src/unittest/python"
+dir_docs = "docs"
+dir_reports = "target/reports"
+dir_target = "target"
+
+# Plugins
+plugins = [
+    "python.distutils",
+    "python.unittest",
+    "python.install_dependencies",
+    "python.pip"
+]
+
+# Unit test settings
+unittest_module_glob = "test_*.py"
+
+[tool.pybuilder.plugins.install_dependencies]
+install_log_level = "DEBUG"
+
+[tool.pybuilder.plugins.pip]
+index_url = "https://pypi.org/simple"
+
+[tool.pybuilder.plugins.distutils]
+author = "Sayak Ghorai"
+author_email = "your.email@example.com"
+description = "A Python project for detecting and counting humans in images or video streams."
+home_page = "https://github.com/sayakghorai34/Human-Detection-and-Counting"
+
+[tool.pybuilder.plugins.install_dependencies]
+requirements_file = "requirements.txt"
