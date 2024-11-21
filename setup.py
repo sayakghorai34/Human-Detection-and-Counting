@@ -12,21 +12,23 @@ setup(
     ],
 )
 
+
 def check_python_version():
     """Check if Python 3.11 is installed."""
     print("Checking Python version...")
-    try:
-        result = subprocess.run(["python", "--version"], capture_output=True, text=True)
-        if result.returncode == 0 and "3.11" in result.stdout:
-            print("Python 3.11 found.")
-            python_path = "python"  # or use the detected path
-        else:
-            print("Python 3.11 not found.")
-            python_path = None
+    commands = [["python3.11", "--version"], ["python3", "--version"], ["python", "--version"] ]
 
-    except FileNotFoundError:
-        print("Python 3.11 not found.")
-        return None
+    for cmd in commands:
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            if result.returncode == 0 and "3.11" in result.stdout:
+                print(f"Python 3.11 found with command: {' '.join(cmd)}")
+                return cmd[0]  # Return the executable name
+        except FileNotFoundError:
+            continue  # Try the next command
+
+    print("Python 3.11 not found.")
+    return None
 
 
 def install_python():
