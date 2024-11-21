@@ -1,6 +1,6 @@
 [build-system]
 requires = ["pybuilder>=0.13.4", "setuptools>=42", "wheel"]
-build-backend = "pybuilder.backend"
+#build-backend = "pybuilder.backend"
 
 [tool.pybuilder]
 name = "human-detection-and-counting"
