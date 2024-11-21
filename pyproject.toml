@@ -30,7 +30,7 @@ unittest_module_glob = "test_*.py"
 
 [tool.pybuilder.plugins.install_dependencies]
 install_log_level = "DEBUG"
-requirements_file = "requirements.txt"  # Combined into a single section
+requirements_file = "requirements.txt"  # Merge duplicate entries here
 
 [tool.pybuilder.plugins.pip]
 index_url = "https://pypi.org/simple"
