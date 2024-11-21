@@ -1,5 +1,5 @@
 absl-py==2.1.0
-ai-edge-litert==1.0.1
+#ai-edge-litert==1.0.1
 certifi==2024.8.30
 charset-normalizer==3.4.0
 coloredlogs==15.0.1
