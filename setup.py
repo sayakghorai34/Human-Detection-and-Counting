@@ -84,8 +84,8 @@ def install_requirements():
         subprocess.run(["pip", "install", "-r", "requirements.txt"])
 
     # Install your GitHub repository (replace 'main' with the branch name you want)
-    github_repo_url = "git+https://github.com/sayakghorai34/Human-Detection-and-Counting.git@main"
-    subprocess.run(["pip", "install", github_repo_url])
+    # github_repo_url = "git+https://github.com/sayakghorai34/Human-Detection-and-Counting.git@main"
+    # subprocess.run(["pip", "install", github_repo_url])
 
 
 def setup_environment():
