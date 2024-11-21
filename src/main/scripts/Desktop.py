@@ -3,8 +3,8 @@ from ultralytics import YOLO
 
 
 def main():
-    model = YOLO("models/yolov8s.onnx")
-
+    model = YOLO("models/yolo11m.onnx")
+    # model = YOLO('models/yolo11l_ncnn_model')
     video_source = 1
     cap = cv2.VideoCapture(video_source)
 
