@@ -16,13 +16,14 @@ def check_python_version():
     """Check if Python 3.11 is installed."""
     print("Checking Python version...")
     try:
-        result = subprocess.run(["python3.11", "--version"], capture_output=True, text=True)
-        if result.returncode == 0:
+        result = subprocess.run(["python", "--version"], capture_output=True, text=True)
+        if result.returncode == 0 and "3.11" in result.stdout:
             print("Python 3.11 found.")
-            return "python3.11"
+            python_path = "python"  # or use the detected path
         else:
             print("Python 3.11 not found.")
-            return None
+            python_path = None
+
     except FileNotFoundError:
         print("Python 3.11 not found.")
         return None
