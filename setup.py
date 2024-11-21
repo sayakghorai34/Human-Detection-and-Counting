@@ -6,6 +6,15 @@ import sys
 import platform
 from pathlib import Path
 from sys import version_info
+from setuptools import setup
+
+setup(
+    name="human-detection-and-counting",
+    version="0.1.0",
+    install_requires=[
+        "pybuilder>=0.13.4",
+    ],
+)
 
 py3 = version_info[0] == 3
 py2 = not py3
