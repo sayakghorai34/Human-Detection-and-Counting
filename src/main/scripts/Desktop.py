@@ -11,11 +11,11 @@ class YOLOApp:
         self.root.title("YOLO Detection GUI")
 
         # Initialize YOLO model
-        self.model = YOLO("src/main/scripts/models/yolo11m.onnx")
+        self.model = YOLO("models/yolo11m.onnx")
 
         # Set up video capture
         #video Window
-        self.cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture(1)
         self.desired_width = 640
         self.desired_height = 640
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.desired_width)
