@@ -14,6 +14,7 @@ class YOLOApp:
         self.model = YOLO("src/main/scripts/models/yolo11m.onnx")
 
         # Set up video capture
+        #video Window
         self.cap = cv2.VideoCapture(0)
         self.desired_width = 640
         self.desired_height = 640
