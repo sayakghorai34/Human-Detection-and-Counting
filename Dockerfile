@@ -5,7 +5,8 @@ FROM python:3.9-buster
 LABEL authors="sayakghorai"
 
 # Install necessary system libraries for GUI and OpenCV
-RUN libopencv-dev \
+RUN apt-get install -y \
+    libopencv-dev \
     python3-opencv \
     libatlas-base-dev \
     tk \
