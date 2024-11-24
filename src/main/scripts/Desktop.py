@@ -1,39 +1,80 @@
 import cv2
 from ultralytics import YOLO
+import tkinter as tk
+from PIL import Image, ImageTk
+from threading import Thread
 
 
-def main():
-    model = YOLO("models/yolo11m.onnx")
-    # model = YOLO('models/yolo11l_ncnn_model')
-    video_source = 1
-    cap = cv2.VideoCapture(video_source)
+class YOLOApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("YOLO Detection GUI")
 
-    if not cap.isOpened():
-        print("Error: Unable to open video source.")
-        return
+        # Initialize YOLO model
+        self.model = YOLO("src/main/scripts/models/yolo11m.onnx")
 
-    desired_width = 640
-    desired_height = 640
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, desired_width)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, desired_height)
+        # Set up video capture
+        self.cap = cv2.VideoCapture(0)
+        self.desired_width = 640
+        self.desired_height = 640
+        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.desired_width)
+        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.desired_height)
 
-    while True:
-        ret, frame = cap.read()
-        if not ret:
-            print("End of video or unable to fetch frame.")
-            break
+        # Create GUI elements
+        self.video_frame = tk.Label(root)
+        self.video_frame.pack()
 
-        results = model.predict(source=frame, conf=0.4, iou=0.55, verbose=True)
+        self.start_button = tk.Button(root, text="Start", command=self.start_video)
+        self.start_button.pack()
 
-        annotated_frame = results[0].plot()
+        self.stop_button = tk.Button(root, text="Stop", command=self.stop_video)
+        self.stop_button.pack()
 
-        cv2.imshow("YOLO Detection", annotated_frame)
+        self.exit_button = tk.Button(root, text="Exit", command=self.exit_app)
+        self.exit_button.pack()
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-    cap.release()
-    cv2.destroyAllWindows()
+        self.running = False
+        self.thread = None
+
+    def start_video(self):
+        if not self.running:
+            self.running = True
+            self.thread = Thread(target=self.video_loop, daemon=True)
+            self.thread.start()
+
+    def stop_video(self):
+        self.running = False
+
+    def exit_app(self):
+        self.stop_video()
+        if self.cap.isOpened():
+            self.cap.release()
+        self.root.destroy()
+
+    def video_loop(self):
+        while self.running:
+            ret, frame = self.cap.read()
+            if not ret:
+                print("Error: Unable to fetch frame.")
+                break
+
+            # YOLO prediction
+            results = self.model.predict(source=frame, conf=0.4, iou=0.55, verbose=False)
+            annotated_frame = results[0].plot()
+
+            # Convert frame to ImageTk format
+            frame_rgb = cv2.cvtColor(annotated_frame, cv2.COLOR_BGR2RGB)
+            img = Image.fromarray(frame_rgb)
+            imgtk = ImageTk.PhotoImage(image=img)
+
+            # Update GUI video frame
+            self.video_frame.imgtk = imgtk
+            self.video_frame.configure(image=imgtk)
+
+        self.video_frame.configure(image=None)  # Clear frame after stopping
 
 
 if __name__ == "__main__":
-    main()
+    root = tk.Tk()
+    app = YOLOApp(root)
+    root.mainloop()
